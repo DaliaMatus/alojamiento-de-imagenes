@@ -1,6 +1,8 @@
 const path=require('path');
-const {randomNumber}=require('../helpers/libs');//
+const {randomNumber}=require('../helpers/libs');
 const fs=require('fs-extra');
+
+const {Image}=require('../models/index');
 
 const ctrl={};
 
@@ -17,8 +19,14 @@ ctrl.create=async(req,res)=>{
     
     if(ext === '.png' || ext === '.jpg' || ext === '.jpeg' || ext === '.gif'){
        await fs.rename(imageTempPath, targetPath);
+       const newImg=new Image({
+            title:req.body.title,
+            filename:imgUrl + ext,
+            description:req.body.description
+        });
+        const imageSaved=await newImg.save();
+        console.log(newImg)
     }
-    
     res.send('received');
 };
 
