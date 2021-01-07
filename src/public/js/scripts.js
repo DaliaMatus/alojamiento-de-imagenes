@@ -1,3 +1,10 @@
+$('#post-comment').hide();
+
+$('#btn-toggle-comment').click(e =>{
+    e.preventDefault();
+    $('#post-comment').slideToggle();
+});
+
 $('#btn-like').click(function(e){
     e.preventDefault();
     let imgId=$(this).data('id');
